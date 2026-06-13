@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>APP Analista — Laboratorio</title>
+    <link rel="stylesheet" href="./styles/lab.css" />
+  </head>
+  <body>
+    <header class="app-header" style="border-bottom-color: var(--blue-500)">
+      <div class="logo">🧪</div>
+      <h1>Laboratorio Clínico</h1>
+      <span
+        class="subtitle"
+        style="background: var(--blue-100); color: var(--blue-700)"
+        >— APP Analista</span
+      >
+    </header>
+
+    <main class="app-main">
+      <div class="dashboard-grid">
+        <!-- PANEL IZQUIERDO: lista de exámenes -->
+        <div class="panel-left">
+          <section id="analista" class="card">
+            <div
+              class="card-header"
+              style="flex-direction: column; align-items: stretch; gap: 12px"
+            >
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                "
+              >
+                <h2>Exámenes para analizar</h2>
+              </div>
+              <div class="btn-row" style="margin-top: 0; gap: 6px">
+                <button
+                  id="analista_filtroTodos"
+                  class="btn btn-secondary active"
+                  style="height: 26px; font-size: 11px"
+                >
+                  Todos
+                </button>
+                <button
+                  id="analista_filtroPendientes"
+                  class="btn btn-secondary"
+                  style="height: 26px; font-size: 11px"
+                >
+                  Pendientes
+                </button>
+                <button
+                  id="analista_filtroListos"
+                  class="btn btn-secondary"
+                  style="height: 26px; font-size: 11px"
+                >
+                  Listos
+                </button>
+              </div>
+            </div>
+            <div class="tbl-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Paciente</th>
+                    <th>Estado</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="analista_tblExamenes"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <!-- PANEL DERECHO: estudios del examen seleccionado para ingresar resultados -->
+        <div class="panel-right">
+          <!-- Estado vacío -->
+          <div id="analista-empty-state" class="card empty-state">
+            <div class="empty-icon">🧪</div>
+            <p>
+              Seleccione un examen de la lista<br />para ingresar los resultados
+            </p>
+          </div>
+
+          <!-- Estudios -->
+          <section id="analista_secEstudios" hidden class="card">
+            <div class="card-header">
+              <h2>Cargar Resultados</h2>
+              <button
+                id="analista_btEnviarWhatsApp"
+                class="btn btn-whatsapp"
+                style="font-size: 13px; height: 32px"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  style="margin-right: 4px"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  ></path>
+                </svg>
+                Enviar por WhatsApp
+              </button>
+            </div>
+            <div class="card-body">
+              <div
+                id="analista_lblPaciente"
+                class="panel-info"
+                style="font-size: 14px; margin-bottom: 20px"
+              ></div>
+
+              <div class="tbl-wrap">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Código</th>
+                      <th>Estudio</th>
+                      <th>Valor de Referencia</th>
+                      <th style="width: 140px">Resultado</th>
+                      <th style="width: 80px"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="analista_tblEstudios"></tbody>
+                </table>
+              </div>
+
+              <div
+                style="display: flex; justify-content: center; margin-top: 16px"
+              >
+                <button
+                  id="analista_btProcesar"
+                  class="btn btn-primary"
+                  style="font-size: 14px; height: 36px; padding: 0 20px"
+                >
+                  Procesar Examen
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <script type="module">
+      import Cl_cAnalista from "./dist/controllers/Cl_cAnalista.js";
+      import Cl_vAnalista from "./dist/views/Cl_vAnalista.js";
+      import Cl_mLaboratorio from "./dist/models/Cl_mLaboratorio.js";
+
+      new Cl_cAnalista({
+        modelo: new Cl_mLaboratorio(),
+        vista: new Cl_vAnalista(),
+      });
+    </script>
+  </body>
+</html>
