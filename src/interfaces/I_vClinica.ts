@@ -15,6 +15,9 @@ export default interface I_vClinica {
   onGuardarExamen(callback: () => void): void;
   onCancelarExamen(callback: () => void): void;
   onBuscarPacientesPorEstudio(callback: (codigo: string) => void): void;
+  onBuscarPorNombre(callback: (nombre: string) => void): void;
+  onCierreCaja(callback: () => void): void;
+  onMasSolicitados(callback: () => void): void;
 
   // Estudios
   estudioId: string;

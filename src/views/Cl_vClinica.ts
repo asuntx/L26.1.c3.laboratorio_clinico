@@ -10,10 +10,13 @@ export default class Cl_vClinica implements I_vClinica {
   private btFiltroTodos = document.getElementById("lab_filtroTodos") as HTMLButtonElement;
   private btFiltroPendientes = document.getElementById("lab_filtroPendientes") as HTMLButtonElement;
   private btFiltroListos = document.getElementById("lab_filtroListos") as HTMLButtonElement;
+  private btCierreCaja = document.getElementById("lab_btCierreCaja") as HTMLButtonElement;
+  private btMasSolicitados = document.getElementById("lab_btMasSolicitados") as HTMLButtonElement;
   private btAbrirNuevoExamen = document.getElementById("lab_btNuevoExamen") as HTMLButtonElement;
 
   private inBuscarEstudio = document.getElementById("clinica_inBuscarEstudio") as HTMLInputElement;
   private btBuscarPacientes = document.getElementById("clinica_btBuscarPacientes") as HTMLButtonElement;
+  private inBuscarNombre = document.getElementById("clinica_inBuscarNombre") as HTMLInputElement;
 
   // Nuevo Examen (Modal)
   private modalNuevoExamen = document.getElementById("modal_nuevoExamen") as HTMLDialogElement;
@@ -169,6 +172,20 @@ export default class Cl_vClinica implements I_vClinica {
     this.btBuscarPacientes.onclick = () => {
       callback(this.inBuscarEstudio.value.trim().toUpperCase());
     };
+  }
+
+  onBuscarPorNombre(callback: (nombre: string) => void): void {
+    this.inBuscarNombre.addEventListener("input", () => {
+      callback(this.inBuscarNombre.value.trim().toLowerCase());
+    });
+  }
+
+  onCierreCaja(callback: () => void): void {
+    this.btCierreCaja.onclick = callback;
+  }
+
+  onMasSolicitados(callback: () => void): void {
+    this.btMasSolicitados.onclick = callback;
   }
 
   onVerEstudios(callback: (examen: Cl_mExamen) => void): void {

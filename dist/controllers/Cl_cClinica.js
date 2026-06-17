@@ -13,6 +13,11 @@ export default class Cl_cClinica {
             this.vista.mostrarExamenes(this.modelo.filtrarExamenes(filtro));
         });
         this.vista.onBuscarPacientesPorEstudio((codigo) => this.onBuscarPacientesPorEstudio(codigo));
+        this.vista.onBuscarPorNombre((nombre) => {
+            this.vista.mostrarExamenes(this.modelo.filtrarExamenesPorNombre(nombre));
+        });
+        this.vista.onCierreCaja(() => this.onCierreCaja());
+        this.vista.onMasSolicitados(() => this.onMasSolicitados());
         this.vista.onVerEstudios((examen) => this.onVerEstudios(examen));
         this.vista.onGuardarExamen(() => this.onGuardarExamen());
         this.vista.onCancelarExamen(() => this.vista.ocultarPanelNuevoExamen());
@@ -88,6 +93,31 @@ export default class Cl_cClinica {
         else {
             alert(`No se encontraron pacientes para el estudio ${codigo}.`);
         }
+    }
+    onCierreCaja() {
+        const total = this.modelo.calcularIngresosTotales();
+        const efectivo = this.modelo.calcularIngresosPorMetodo("efectivo");
+        const tarjeta = this.modelo.calcularIngresosPorMetodo("tarjeta");
+        const transferencia = this.modelo.calcularIngresosPorMetodo("transferencia");
+        const pagoMovil = this.modelo.calcularIngresosPorMetodo("pagoMovil");
+        alert(`💰 RESUMEN DE INGRESOS (CIERRE DE CAJA) 💰\n\n` +
+            `===================================\n` +
+            `TOTAL INGRESADO: Bs ${total.toFixed(2)}\n` +
+            `===================================\n\n` +
+            `Desglose por método de pago:\n` +
+            `💵 Efectivo:      Bs ${efectivo.toFixed(2)}\n` +
+            `💳 Tarjeta:       Bs ${tarjeta.toFixed(2)}\n` +
+            `🏦 Transferencia: Bs ${transferencia.toFixed(2)}\n` +
+            `📱 Pago Móvil:    Bs ${pagoMovil.toFixed(2)}`);
+    }
+    onMasSolicitados() {
+        const ranking = this.modelo.estudiosMasSolicitados();
+        if (ranking.length === 0) {
+            alert("No hay estudios registrados aún.");
+            return;
+        }
+        const mensaje = ranking.map((r, i) => `${i + 1}. ${r.nombre}: ${r.cantidad} veces`).join("\n");
+        alert(`📊 ESTUDIOS MÁS SOLICITADOS 📊\n\n${mensaje}`);
     }
     async onGuardarExamen() {
         const seleccionados = this.vista.estudiosSeleccionados;

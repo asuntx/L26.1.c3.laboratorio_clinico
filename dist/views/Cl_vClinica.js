@@ -8,9 +8,12 @@ export default class Cl_vClinica {
     btFiltroTodos = document.getElementById("lab_filtroTodos");
     btFiltroPendientes = document.getElementById("lab_filtroPendientes");
     btFiltroListos = document.getElementById("lab_filtroListos");
+    btCierreCaja = document.getElementById("lab_btCierreCaja");
+    btMasSolicitados = document.getElementById("lab_btMasSolicitados");
     btAbrirNuevoExamen = document.getElementById("lab_btNuevoExamen");
     inBuscarEstudio = document.getElementById("clinica_inBuscarEstudio");
     btBuscarPacientes = document.getElementById("clinica_btBuscarPacientes");
+    inBuscarNombre = document.getElementById("clinica_inBuscarNombre");
     // Nuevo Examen (Modal)
     modalNuevoExamen = document.getElementById("modal_nuevoExamen");
     btCerrarTop = document.getElementById("examen_btCerrarTop");
@@ -146,6 +149,17 @@ export default class Cl_vClinica {
         this.btBuscarPacientes.onclick = () => {
             callback(this.inBuscarEstudio.value.trim().toUpperCase());
         };
+    }
+    onBuscarPorNombre(callback) {
+        this.inBuscarNombre.addEventListener("input", () => {
+            callback(this.inBuscarNombre.value.trim().toLowerCase());
+        });
+    }
+    onCierreCaja(callback) {
+        this.btCierreCaja.onclick = callback;
+    }
+    onMasSolicitados(callback) {
+        this.btMasSolicitados.onclick = callback;
     }
     onVerEstudios(callback) {
         this._verEstudiosCallback = callback;

@@ -14,6 +14,12 @@ export default class Cl_mLaboratorio {
     if (filtro === "todos") return this._examenes;
     return this._examenes.filter(e => e.estado === filtro);
   }
+
+  filtrarExamenesPorNombre(nombre: string): Cl_mExamen[] {
+    if (!nombre) return this._examenes;
+    return this._examenes.filter(e => e.nombrePaciente.toLowerCase().includes(nombre.toLowerCase()));
+  }
+
   nombresHicieronEstudio(codigo:string): string[] {
     let resultados:string[] = []
     this.examenes.forEach(examen => {
@@ -22,5 +28,30 @@ export default class Cl_mLaboratorio {
       }
     })
     return resultados
+  }
+
+  calcularIngresosTotales(): number {
+    return this.examenes.reduce((acc, ex) => acc + ex.monto, 0);
+  }
+
+  calcularIngresosPorMetodo(metodo: string): number {
+    return this.examenes
+      .filter(ex => ex.metodoPago === metodo)
+      .reduce((acc, ex) => acc + ex.monto, 0);
+  }
+
+  estudiosMasSolicitados(): { nombre: string; cantidad: number }[] {
+    const conteo: Record<string, number> = {};
+    this.examenes.forEach(ex => {
+      ex.estudios.forEach(est => {
+        const key = est.nombre || est.codigo;
+        if (!conteo[key]) conteo[key] = 0;
+        conteo[key]++;
+      });
+    });
+
+    return Object.entries(conteo)
+      .map(([nombre, cantidad]) => ({ nombre, cantidad }))
+      .sort((a, b) => b.cantidad - a.cantidad);
   }
 }

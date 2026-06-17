@@ -14,6 +14,29 @@
     </header>
 
     <main class="app-main">
+      <div
+        style="
+          display: flex;
+          justify-content: flex-end;
+          gap: 8px;
+          margin-bottom: 16px;
+        "
+      >
+        <button
+          id="lab_btMasSolicitados"
+          class="btn btn-secondary"
+          style="padding: 8px 16px"
+        >
+          Estudios más solicitados
+        </button>
+        <button
+          id="lab_btCierreCaja"
+          class="btn btn-primary"
+          style="padding: 8px 16px"
+        >
+          Cierre de Caja
+        </button>
+      </div>
       <!-- Stats -->
       <div class="stat-row">
         <div class="stat-card">
@@ -47,9 +70,13 @@
                 "
               >
                 <h2>Exámenes</h2>
-                <div style="display:flex; gap: 8px;">
-                  <button id="lab_btCatalogo" class="btn btn-secondary">Catálogo</button>
-                  <button id="lab_btNuevoExamen" class="btn btn-primary">+ Nuevo examen</button>
+                <div style="display: flex; gap: 8px">
+                  <button id="lab_btCatalogo" class="btn btn-secondary">
+                    Catálogo
+                  </button>
+                  <button id="lab_btNuevoExamen" class="btn btn-primary">
+                    + Nuevo examen
+                  </button>
                 </div>
               </div>
               <div class="btn-row" style="margin-top: 0; gap: 6px">
@@ -77,9 +104,32 @@
               </div>
 
               <!-- Búsqueda de pacientes por estudio -->
-              <div style="display: flex; gap: 6px; margin-top: 10px;">
-                <input type="text" id="clinica_inBuscarEstudio" class="tbl-input" placeholder="Cod. Estudio (Ej: E02)" style="height: 26px; font-size: 11px; flex: 1;" />
-                <button id="clinica_btBuscarPacientes" class="btn btn-secondary" style="height: 26px; font-size: 11px">Buscar Pacientes</button>
+              <div style="display: flex; gap: 6px; margin-top: 10px">
+                <input
+                  type="text"
+                  id="clinica_inBuscarEstudio"
+                  class="tbl-input"
+                  placeholder="Cod. Estudio (Ej: E02)"
+                  style="height: 26px; font-size: 11px; flex: 1"
+                />
+                <button
+                  id="clinica_btBuscarPacientes"
+                  class="btn btn-secondary"
+                  style="height: 26px; font-size: 11px"
+                >
+                  Buscar Pacientes
+                </button>
+              </div>
+
+              <!-- Filtro por nombre -->
+              <div style="margin-top: 8px">
+                <input
+                  type="text"
+                  id="clinica_inBuscarNombre"
+                  class="tbl-input"
+                  placeholder="🔍 Buscar paciente por nombre..."
+                  style="height: 30px; font-size: 12px; width: 100%; border-radius: 6px"
+                />
               </div>
             </div>
             <div class="tbl-wrap">
@@ -97,7 +147,6 @@
               </table>
             </div>
           </section>
-
         </div>
 
         <!-- PANEL DERECHO: estudios del examen seleccionado -->
@@ -126,8 +175,6 @@
 
               <div id="estudio_pacienteInfo" class="panel-info"></div>
 
-
-
               <div class="divider"></div>
 
               <div class="tbl-wrap">
@@ -152,10 +199,38 @@
     </main>
 
     <!-- Modal Catálogo de Estudios -->
-    <dialog id="modal_catalogo" class="card" style="padding:0; border:none; border-radius:12px; max-width: 650px; width: 100%;">
-      <div class="card-header" style="display:flex; justify-content:space-between; align-items:center;">
-        <h2 style="margin:0;">Catálogo de Estudios</h2>
-        <button id="cat_btCerrarTop" style="background:none;border:none;font-size:24px;cursor:pointer;color:var(--gray-500);">&times;</button>
+    <dialog
+      id="modal_catalogo"
+      class="card"
+      style="
+        padding: 0;
+        border: none;
+        border-radius: 12px;
+        max-width: 650px;
+        width: 100%;
+      "
+    >
+      <div
+        class="card-header"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <h2 style="margin: 0">Catálogo de Estudios</h2>
+        <button
+          id="cat_btCerrarTop"
+          style="
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray-500);
+          "
+        >
+          &times;
+        </button>
       </div>
       <div class="card-body">
         <div class="form-grid">
@@ -165,7 +240,11 @@
           </div>
           <div class="field">
             <label>Nombre</label>
-            <input type="text" id="cat_inNombre" placeholder="Nombre del estudio" />
+            <input
+              type="text"
+              id="cat_inNombre"
+              placeholder="Nombre del estudio"
+            />
           </div>
           <div class="field">
             <label>Valor Ref.</label>
@@ -176,13 +255,18 @@
             <input type="number" id="cat_inPrecio" placeholder="0.00" />
           </div>
         </div>
-        <div class="btn-row" style="margin-top: 12px; justify-content: flex-start;">
-          <button id="cat_btAgregar" class="btn btn-primary">Agregar Estudio</button>
+        <div
+          class="btn-row"
+          style="margin-top: 12px; justify-content: flex-start"
+        >
+          <button id="cat_btAgregar" class="btn btn-primary">
+            Agregar Estudio
+          </button>
         </div>
 
-        <div class="divider" style="margin: 20px 0 12px 0;"></div>
-        
-        <div class="tbl-wrap" style="max-height: 250px; overflow-y: auto;">
+        <div class="divider" style="margin: 20px 0 12px 0"></div>
+
+        <div class="tbl-wrap" style="max-height: 250px; overflow-y: auto">
           <table class="data-table">
             <thead>
               <tr>
@@ -200,24 +284,64 @@
     </dialog>
 
     <!-- Modal Nuevo Examen -->
-    <dialog id="modal_nuevoExamen" class="card" style="padding:0; border:none; border-radius:12px; max-width: 500px; width: 100%;">
-      <div class="card-header" style="display:flex; justify-content:space-between; align-items:center;">
-        <h2 style="margin:0;">Nuevo examen</h2>
-        <button id="examen_btCerrarTop" style="background:none;border:none;font-size:24px;cursor:pointer;color:var(--gray-500);">&times;</button>
+    <dialog
+      id="modal_nuevoExamen"
+      class="card"
+      style="
+        padding: 0;
+        border: none;
+        border-radius: 12px;
+        max-width: 500px;
+        width: 100%;
+      "
+    >
+      <div
+        class="card-header"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <h2 style="margin: 0">Nuevo examen</h2>
+        <button
+          id="examen_btCerrarTop"
+          style="
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray-500);
+          "
+        >
+          &times;
+        </button>
       </div>
       <div class="card-body">
         <div class="form-grid">
           <div class="field">
             <label>Nombre del paciente</label>
-            <input type="text" id="examen_inNombrePaciente" placeholder="Nombre completo" />
+            <input
+              type="text"
+              id="examen_inNombrePaciente"
+              placeholder="Nombre completo"
+            />
           </div>
           <div class="field">
             <label>Cédula de Identidad</label>
-            <input type="text" id="examen_inCedulaPaciente" placeholder="V-12345678" />
+            <input
+              type="text"
+              id="examen_inCedulaPaciente"
+              placeholder="V-12345678"
+            />
           </div>
           <div class="field">
             <label>WhatsApp</label>
-            <input type="text" id="examen_inWhatsappPaciente" placeholder="04141234567" />
+            <input
+              type="text"
+              id="examen_inWhatsappPaciente"
+              placeholder="04141234567"
+            />
           </div>
           <div class="field">
             <label>Método de pago</label>
@@ -233,18 +357,22 @@
             <input type="date" id="examen_inFecha" />
           </div>
         </div>
-        
-        <div class="divider" style="margin: 20px 0 12px 0;"></div>
+
+        <div class="divider" style="margin: 20px 0 12px 0"></div>
         <div class="field">
-          <label style="margin-bottom: 8px;">Estudios a realizar</label>
+          <label style="margin-bottom: 8px">Estudios a realizar</label>
           <div id="examen_chkEstudios" class="checkbox-grid">
             <!-- Checkboxes dinámicos -->
           </div>
         </div>
 
-        <div class="btn-row" style="margin-top: 24px;">
-          <button id="examen_btEnviar" class="btn btn-primary">Guardar examen</button>
-          <button id="examen_btVolver" class="btn btn-secondary">Cancelar</button>
+        <div class="btn-row" style="margin-top: 24px">
+          <button id="examen_btEnviar" class="btn btn-primary">
+            Guardar examen
+          </button>
+          <button id="examen_btVolver" class="btn btn-secondary">
+            Cancelar
+          </button>
         </div>
       </div>
     </dialog>
@@ -256,7 +384,7 @@
 
       const app = new Cl_cClinica({
         modelo: new Cl_mLaboratorio(),
-        vista: new Cl_vClinica()
+        vista: new Cl_vClinica(),
       });
     </script>
   </body>
